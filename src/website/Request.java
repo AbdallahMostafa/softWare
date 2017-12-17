@@ -15,7 +15,6 @@ public class Request {
 
   private String description;
 
-
   private IUser sender;
 
 

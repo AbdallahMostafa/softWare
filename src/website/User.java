@@ -18,9 +18,18 @@ public class User implements IUser{
   private int age;
   private String gender;
   private String passwrod;
+  private String type;
+  
 
   //public ICart myICart;
-  
+  public void settype(String type)
+  {
+      this.type=type;
+  }
+  public String gettype()
+  {
+      return type;
+  }
   public void setname(String name){
       this.name=name;
   }
