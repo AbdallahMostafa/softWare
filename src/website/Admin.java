@@ -14,10 +14,7 @@ import java.util.Scanner;
 import java.util.Vector;
 
 public class Admin extends User {
-        static  ArrayList<ProductRequest> suggestedProduct = new ArrayList<ProductRequest>();
-	static  ArrayList<BrandRequest> suggestedbrand = new ArrayList<BrandRequest>();
-	static  ArrayList<StoreRequest> appendingStores = new ArrayList<StoreRequest>();
-        public void addStoreToSystem(ArrayList<Store> stores)
+        public void addStoreToSystem()
         {
                 Scanner scanner = new Scanner(System.in);
 		int choice;
@@ -28,10 +25,10 @@ public class Admin extends User {
                         }
                     	System.out.println("Enter the number of store you want to approve: " +"\n" + "or enter (-1) to exit or (-2) to show products");
                         choice = scanner.nextInt();
-			if(choice<=appendingStores.size() && choice > 0)
+			if(choice<=StoreDatabase.appendingStores.size() && choice > 0)
 			{
-				stores.add(appendingStores.get(choice-1).getStore());
-                                appendingStores.remove(choice-1);
+				StoreDatabase.stores.add(StoreDatabase.appendingStores.get(choice-1).getStore());
+                                StoreDatabase.appendingStores.remove(choice-1);
                                 System.out.println("Done.");
 			}
                         else if(choice==-1)
@@ -45,17 +42,17 @@ public class Admin extends User {
         }
         public boolean displayAppendingStore()
 	{
-                if(appendingStores.size()==0)
+                if(StoreDatabase.appendingStores.size()==0)
                     return false;
-		for(int i = 0; i <appendingStores.size(); i++)
+		for(int i = 0; i <StoreDatabase.appendingStores.size(); i++)
 		{
-			System.out.println((i+1) +"- Request sender :" +appendingStores.get(i).getsender().getname()+", ID:"+appendingStores.get(i).getsender().getID());
-                        System.out.println("Store :" +appendingStores.get(i).getStore().getname()+" ");
+			System.out.println((i+1) +"- Request sender :" +StoreDatabase.appendingStores.get(i).getsender().getname()+", ID:"+StoreDatabase.appendingStores.get(i).getsender().getID());
+                        System.out.println("Store :" +StoreDatabase.appendingStores.get(i).getStore().getname()+" ");
 		}
                 return true;
 
 	}
-        public void addBrandToSystem(ArrayList<Brand> brands)
+        public void addBrandToSystem()
 	{
                
 		Scanner scanner = new Scanner(System.in);
@@ -68,10 +65,10 @@ public class Admin extends User {
                         }
                         System.out.println("Enter the number of brand you want to approve: " +"\n" + "or enter (-1) to exit or (-2) to show products");
                         choice = scanner.nextInt();
-                        if(choice<=suggestedbrand.size() && choice > 0)
+                        if(choice<=BrandDatabase.suggestedbrand.size() && choice > 0)
 			{
-				brands.add(suggestedbrand.get(choice-1).getBrand());
-                                suggestedbrand.remove(choice-1);
+				BrandDatabase.brands.add(BrandDatabase.suggestedbrand.get(choice-1).getBrand());
+                                BrandDatabase.suggestedbrand.remove(choice-1);
                                 System.out.println("Done.");
 			}
 			else if(choice==-1)
@@ -87,25 +84,25 @@ public class Admin extends User {
 	}
 	public boolean displaySuggestedBrand()
 	{
-                if(suggestedbrand.size()==0)
+                if(BrandDatabase.suggestedbrand.size()==0)
                     return false;
-		for(int i = 0; i <suggestedbrand.size(); i++)
+		for(int i = 0; i <BrandDatabase.suggestedbrand.size(); i++)
 		{
-                        System.out.println((i+1) +"- Request sender :" +suggestedbrand.get(i).getsender().getname()+", ID:"+suggestedbrand.get(i).getsender().getID());
-                        System.out.println("Brand :" +suggestedbrand.get(i).getBrand().getBrandName()+" ");		}
+                        System.out.println((i+1) +"- Request sender :" +BrandDatabase.suggestedbrand.get(i).getsender().getname()+", ID:"+BrandDatabase.suggestedbrand.get(i).getsender().getID());
+                        System.out.println("Brand :" +BrandDatabase.suggestedbrand.get(i).getBrand().getBrandName()+" ");		}
                 return true;
 	}
         public boolean displaySuggetedProducts()
 	{
-                if(suggestedProduct.size()==0)
+                if(ProductDatabase.suggestedProduct.size()==0)
                     return false;
-		for(int i = 0; i <suggestedProduct.size(); i++)
+		for(int i = 0; i <ProductDatabase.suggestedProduct.size(); i++)
 		{
-                        System.out.println((i+1) +"- Request sender :" +suggestedProduct.get(i).getsender().getname()+", ID:"+suggestedProduct.get(i).getsender().getID());
-                        System.out.println("Product name:" +suggestedProduct.get(i).getProduct().getname()+" ");		}
+                        System.out.println((i+1) +"- Request sender :" +ProductDatabase.suggestedProduct.get(i).getsender().getname()+", ID:"+ProductDatabase.suggestedProduct.get(i).getsender().getID());
+                        System.out.println("Product name:" +ProductDatabase.suggestedProduct.get(i).getProduct().getname()+" ");		}
                 return true;
 	}
-        public void addProductToSystem(ArrayList<IProducts> products)
+        public void addProductToSystem()
 	{
                
 		Scanner scanner = new Scanner(System.in);
@@ -118,10 +115,10 @@ public class Admin extends User {
                         }
                         System.out.println("Enter the number of product you want to approve: " +"\n" + "or enter (-1) to exit");
 			choice=scanner.nextInt();
-                        if(choice<=suggestedProduct.size() && choice > 0)
+                        if(choice<=ProductDatabase.suggestedProduct.size() && choice > 0)
 			{
-				products.add(suggestedProduct.get(choice-1).getProduct());
-                                suggestedProduct.remove(choice-1);
+				ProductDatabase.products.add(ProductDatabase.suggestedProduct.get(choice-1).getProduct());
+                                ProductDatabase.suggestedProduct.remove(choice-1);
                                 System.out.println("Done.");
 			}
 			else if(choice==-1)
@@ -135,14 +132,14 @@ public class Admin extends User {
 		}
 		scanner.close();
 	}
-        public void addproduct(ArrayList<IProducts> products)
+        public void addproduct()
         {
             Scanner cin=new Scanner(System.in);
             IProducts product=new Products();
             System.out.println("Enter product name, brand: ");
             product.setname(cin.next());
             product.setbrand(cin.next());
-            products.add(product);
+            ProductDatabase.products.add(product);
         }
   /*public Request requests [];
 

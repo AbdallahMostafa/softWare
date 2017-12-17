@@ -32,6 +32,10 @@ public class Store {
   {
       products=new ArrayList<IProducts>();
   }
+  public IUser getowner()
+  {
+      return candidateOwner;
+  }
   public void setproduct(IProducts product)
   {
       products.add(product);
@@ -48,7 +52,26 @@ public class Store {
   {
       return name;
   }
-  
+  public void setaddress(String add)
+  {
+      this.Address=add;
+  }
+  public String getaddress()
+  {
+      return Address;
+  }
+   public void setnumber(String number)
+  {
+      this.phoneNo=number;
+  }
+  public String getnumber()
+  {
+      return phoneNo;
+  }
+  public void setowner(IUser user)
+  {
+      candidateOwner=user;
+  }
   public void changestoreinfo() {
   }
 
@@ -65,11 +88,11 @@ public class Store {
       product.setprice(cin.nextFloat());
       products.add(product);
   }
-  public void addproduct(ArrayList<IProducts> product)
+  public void addproduct()
   {
-      for(int i=0  ;i<product.size();i++)
+      for(int i=0  ;i<ProductDatabase.products.size();i++)
       {
-          System.out.println(i+1+". "+product.get(i).getname());
+          System.out.println(i+1+". "+ProductDatabase.products.get(i).getname());
       }
       System.out.println("To add product to stores enter the number. Or -1 to exit menu: ");
       Scanner cin=new Scanner(System.in);
@@ -78,7 +101,7 @@ public class Store {
         String choice=cin.next();
         int Intchoice=Integer.parseInt(choice);
         if(Intchoice>0 && Intchoice<=products.size())
-             completeproduct(products.get(Intchoice-1));
+             completeproduct(ProductDatabase.products.get(Intchoice-1));
         else if(choice.equals("-1"))
              break;
         else

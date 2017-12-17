@@ -83,9 +83,10 @@ public class PremiumStoreOwner extends User {
         request.setsender(this);
         request.setdesc(cin.nextLine());
         request.setStore(store);
-        Admin.appendingStores.add(request);
+        StoreDatabase.appendingStores.add(request);
     }
-    public void suggestProduct(IProducts product){
+    public void suggestProduct(IProducts product)
+    {
             
             ProductRequest request = new ProductRequest();
             Scanner cin= new Scanner(System.in);
@@ -93,7 +94,63 @@ public class PremiumStoreOwner extends User {
             request.setsender(this);
             request.setdesc(cin.nextLine());
             request.setProduct(product);
-            Admin.suggestedProduct.add(request);
+            ProductDatabase.suggestedProduct.add(request);
+    }
+    public void premiumStoreOwnerView()
+    {
+        Scanner cin=new Scanner(System.in);
+        String choice;
+        while(true)
+        {
+            System.out.println("Make your choice: ");
+            System.out.println("1.Suggest products\n2.View stores\n3.Add store\n4.Add products to store\n-1. Sign out");
+            choice=cin.next();
+            if(choice.equals("1"))
+            {
+                IProducts product=new Products();
+                System.out.println("Enter product name, brand: ");
+                product.setname(cin.next());
+                product.setbrand(cin.next());
+                suggestProduct(product);
+            }
+            else if(choice.equals("2"))
+            {
+                int number;
+                for(int i=0 ;i<StoreDatabase.stores.size();i++)
+                {
+                    System.out.println(i+1+".Store name: "+StoreDatabase.stores.get(i).getname()+"\nOwner: "+StoreDatabase.stores.get(i).getowner().getname());
+                    System.out.println("------------------------");
+                }
+                while(true)
+                {
+                    System.out.println("Enter store number to view products: ");
+                    number=cin.nextInt();
+                    if(number>0 && number<=StoreDatabase.stores.size())
+                    {
+                        StoreDatabase.stores.get(number-1).printproducts();
+                    }
+                }
+            }
+            else if(choice.equals("3"))
+            {
+                Store store=new Store();
+                System.out.println("Enter store name, address, phone number :");
+                store.setname(cin.next());
+                store.setaddress(cin.nextLine());
+                store.setnumber(cin.next());
+                store.setowner(this);
+                addstore(store);
+            }
+            else if(choice.equals("4"))
+            {
+                store.addproduct();
+            }
+            else if(choice.equals("-1"))
+                break;
+            else
+                System.out.println("Enter valid input.");
+                
         }
+    }
 }
  

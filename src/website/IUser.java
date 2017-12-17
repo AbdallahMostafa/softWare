@@ -11,6 +11,10 @@ package website;
  */
 public interface IUser {
 
+  public void settype(String type);
+  
+  public String gettype();
+  
   public void setname(String name);
 
   public void setid(String ID);
